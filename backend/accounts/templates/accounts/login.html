@@ -1,0 +1,30 @@
+{% extends "base_accounts.html" %}
+{% block title %}Bridge House Login{% endblock %}
+{% load static %}
+{% block css %}<link href="{% static 'accounts/css/login.css' %}" rel="stylesheet">{% endblock %}
+
+<body>
+{% block body %}
+    <!-- Page Content -->
+    <div class="container" style="padding: 5% 10% 15% 10%; text-align: center;">
+        <div class="card mb-3" id="login-form">
+            <h3 class="card-header">Sepsis Risk App</h3>
+            <div class="card-body">
+                <div class="form-group">
+                    <form method="post">
+                        {% csrf_token %}
+                        <p>
+                            <input id="id_username" name="username" type="username" class="form-control" placeholder="Username" required/>
+                        </p>
+                        <p>
+                            <input id="id_password" name="password" type="password" class="form-control" placeholder="Password" required/>
+                        </p>
+                        <button type="submit" class="btn btn-primary btn-lg btn-block" id="login-button">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+</body>

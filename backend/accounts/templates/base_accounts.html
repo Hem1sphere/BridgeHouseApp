@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="A web app for the Bridge House Medical Practice to help GPs identify patients at risk of sepsis infection.">
+    <meta name="author" content="UCL CS Team 53">
+    <title>{% block title %}{% endblock %}</title>
+    {% load static %}
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+    {% block css %}{% endblock %}
+    {% block js %}{% endblock %}
+
+    <!-- Roboto typeface -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#" id="title" style="vertical-align: middle;"><strong id="bridge-house">Bridge House</strong> Medical Practice</a>
+      <div class="navbar-collapse collapse" id="navbarColor03" style="">
+        {% if user.is_authenticated %}
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/accounts/logout"><span class="badge badge-pill badge-light" style="vertical-align: middle;"><strong>LOG OUT</strong></span></a>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="text" placeholder="Search" style="margin-bottom: 0;" id="search">
+        </form>
+        <img src="{% static 'images/NHS_logo.png' %}" id="nhs-logo">
+        {% else %}
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+          </li>
+        </ul>
+        <img src="{% static 'images/NHS_logo.png' %}" id="nhs-logo">
+        {% endif %}
+      </div>
+    </nav>
+      {% block body %}
+      {% endblock %}
+    </div>
+    <footer class="footer">
+      <div class="container">
+        <span class="text-muted">UCL Computer Science Department Team 53</span>
+      </div>
+    </footer>
+  </body>
+
+</html>

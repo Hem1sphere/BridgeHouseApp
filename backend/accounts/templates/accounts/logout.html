@@ -1,0 +1,26 @@
+{% extends "base_accounts.html" %}
+{% block title %}Bridge House Log Out{% endblock %}
+{% load static %}
+{% block css %}<link href="{% static 'accounts/css/login.css' %}" rel="stylesheet">{% endblock %}
+
+<body>
+{% block body %}
+
+
+    <!-- Page Content -->
+    <div class="container" style="padding: 5% 10% 15% 10%; text-align: center;">
+      <div class="card mb-3" id="login-form">
+          <h3 class="card-header">Sepsis Risk App</h3>
+          <div class="card-body">
+              <h6 class="card-subtitle text-muted" style="margin-top: 1rem;">Successfully logged out</h6>
+              <div class="form-group">
+                <form action='../login'>
+                   <button type="submit" class="btn btn-primary btn-lg btn-block" id="login-button">Login</button>
+                </form>
+              </div>
+          </div>
+      </div>
+    </div>
+
+{% endblock %}
+</body>

@@ -1,0 +1,271 @@
+{% extends "base.html" %}
+{% block title %}Sepsis Risk App{% endblock %}
+{% load static %}
+{% block css %}<link href="{% static 'sepsisrisk/css/main.css' %}" rel="stylesheet">{% endblock %}
+{% block js %}
+<script src="{% static 'sepsisrisk/js/main.js' %}" defer></script>
+<script src="{% static 'sepsisrisk/js/clipboard.min.js' %}"></script>
+{% endblock %}
+
+<body>
+{% block body %}
+
+    <!-- Page Content -->
+    <div class="container">
+     <div class="mainpage-float-lefts card mb-3" id="in">
+       <h3 class="card-header">Sepsis Risk Calculator</h3>
+       <div class="card-body">
+    <h6 class="card-subtitle text-muted">Please fill out the form and click <span class="badge badge-pill badge-primary" style="vertical-align: middle;">Calculate Risk</span> to view results.</h6>
+  </div>
+
+        <form id="patient-form">
+            <fieldset>
+                <legend>Patient's Information</legend>
+                <div class="form-group">
+                  <label for="dob">Date of Birth</label>
+                  <input type="DOB" class="form-control" id="dob" placeholder="DD/MM/YYYY" maxlength="10">
+                </div>
+                <div class="form-group">
+                    <label for="nhsNo">NHS Number</label>
+                    <input type="nhsNo" class="form-control" id="nhsNo" placeholder="10-digit NHS Number" maxlength="10">
+                </div>
+            </fieldset>
+          <hr class="my-4">
+          <fieldset>
+            <legend>Patient's Vitals</legend>
+            <div class="form-group">
+              <label for="temp">Temperature</label>
+              <input type="vital" class="form-control" id="temp" placeholder="ºC">
+            </div>
+            <div class="form-group">
+              <label for="respRate">Respiration Rate</label>
+              <input type="vital" class="form-control" id="respRate" placeholder="RR">
+            </div>
+            <div class="form-group">
+              <label for="bloodPressure">Blood Pressure</label>
+              <input type="vital" class="form-control" id="bloodPressure" placeholder="mmHg">
+            </div>
+            <div class="form-group">
+              <label for="pulse">Pulse</label>
+              <input type="vital" class="form-control" id="pulse" placeholder="BPM">
+            </div>
+            <div class="form-group">
+              <label for="capillaryRefillTime">Capillary Refill Time</label>
+              <input type="vital" class="form-control" id="capillaryRefillTime" placeholder="seconds">
+            </div>
+            <div class="form-group">
+              <label for="o2Stats">Oxygen Saturation</label>
+              <input type="vital" class="form-control" id="o2Stats" placeholder="%">
+            </div>
+            <div class="form-group">
+              <label for="urine-output">Urine Output</label>
+              <select class="custom-select" id="urine-output">
+                <option>Normal</option>
+                <option>Reduced urine output</option>
+                <option>No urine passed for 12-18 hours</option>
+                <option>No urine passed for over 18 hours</option>
+              </select>
+            </div>
+          </fieldset>
+
+          <hr class="my-4">
+          <fieldset>
+            <fieldset class="form-group">
+              <cbox-legend>Mental State</cbox-legend>
+              <cbox-legend-agegroup>Aged 0-11</cbox-legend-agegroup>
+              <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value=""
+                  name="moderate-risk" id="Mental1">
+                  <label class="form-check-label">
+                    Not responding normally to social cues
+                  </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value=""
+                name="moderate-risk" id="Mental2">
+                <label class="form-check-label">
+                  Decreased activity
+                </label>
+              </div>
+              <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" name="moderate-risk" id="Mental3">
+                  <label class="form-check-label">
+                    Parental/carer concern child is behaving differently
+                  </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" name="high-risk" id="Mental4">
+                    <label class="form-check-label">
+                      Appears ill to a  healthcare professional
+                    </label>
+                  </div>
+                  <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" name="high-risk" id="Mental5">
+                      <label class="form-check-label">
+                        Does not wake or if roused does not stay awake
+                      </label>
+                  </div>
+                  <cbox-legend-agegroup-2>--And if aged 0-5--</cbox-legend-agegroup-2>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value=""
+                    name="moderate-risk" id="Mental6">
+                    <label class="form-check-label">
+                      No smile
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value=""
+                    name="moderate-risk" id="Mental7">
+                    <label class="form-check-label">
+                      Wakes only with prolonged stimulation
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value=""
+                    name="high-risk" id="Mental8">
+                    <label class="form-check-label">
+                        Weak high-pitched/continuous cry
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value=""
+                    name="high-risk" id="Mental9">
+                    <label class="form-check-label">
+                      No response to social cues
+                    </label>
+                  </div>
+            </fieldset>
+            <fieldset class="form-group">
+                <cbox-legend-agegroup>Aged 12+</cbox-legend-agegroup>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value=""
+                  name="moderate-risk" id="Mental10">
+                  <label class="form-check-label">
+                    History of new change in behaviour/mental state
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value=""
+                  name="moderate-risk" id="Mental11">
+                  <label class="form-check-label">
+                    Acute deterioration in functional ability
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value=""
+                  name="moderate-risk" id="Mental12">
+                  <label class="form-check-label">
+                      Objective evidence of new altered mental state
+                  </label>
+                </div>
+              </fieldset>
+              <hr class="my-4">
+            </fieldset>
+              <fieldset class="form-group">
+              <cbox-legend>Skin</cbox-legend>
+              <cbox-legend-agegroup>Aged 0-11</cbox-legend-agegroup>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value=""
+                name="moderate-risk" id="Skin1">
+                <label class="form-check-label">
+                  Leg pain
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value=""
+                name="moderate-risk" id="Skin2">
+                <label class="form-check-label">
+                  Cold hands or feet
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value=""
+                name="high-risk" id="Skin3">
+                <label class="form-check-label">
+                    Mottled or ashen skin
+                </label>
+              </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value=""
+                    name="high-risk" id="Skin4">
+                      <label class="form-check-label">
+                        Cyanosis of skin, lips or tongue
+                      </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value=""
+                    name="high-risk" id="Skin5">
+                      <label class="form-check-label">
+                        Non-blanching rash
+                      </label>
+                  </div>
+              <cbox-legend-agegroup-2>--And if aged 0-5--</cbox-legend-agegroup-2>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value=""
+                name="moderate-risk" id="Skin6">
+                  <label class="form-check-label">
+                    Pale or flushed
+                  </label>
+                </div>
+                </fieldset>
+                <fieldset class="form-group">
+                <cbox-legend-agegroup>Aged 12+</cbox-legend-agegroup>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value=""
+                  name="moderate-risk" id="Skin7">
+                    <label class="form-check-label">
+                      Signs of potential infection (redness, swelling or discharge at surgical site or breakdown of wound)
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value=""
+                    name="high-risk" id="Skin8">
+                      <label class="form-check-label">
+                        Mottled/ashen skin or cyanosis (skin/lips/tongue)
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value=""
+                      name="high-risk" id="Skin9">
+                        <label class="form-check-label">
+                          Non-blanching rash
+                        </label>
+                      </div>
+
+            </fieldset>
+            <hr class="my-4">
+            <button type="button" class="btn btn-submit" id="calculateRisk" enabled>Calculate Risk</button>
+          </fieldset>
+        </form>
+    </div>
+
+
+    <div class="mainpage-float-right" id="out">
+        <form>
+            <fieldset>
+              <div class="alert alert-secondary" id="result-card">
+                <strong id="result-title">Please submit form to view results</strong><p id="result-body"></p>
+              </div>
+            </fieldset>
+
+          <fieldset>
+            <div class="description-jumbotron" id="summary-card">
+              <h3 class="display-5" id="summary-header">Summary</h3>
+              <hr class="my-4">
+              <ul id="summary-list">
+              </ul>
+              <hr class="my-4">
+              <div class="lead" id="summary-footer">
+                <button class="btn btn-primary" type="button" id="copy" data-clipboard-target="#summary-list">Copy Results</button>
+                <button class="btn btn-primary" type="button" id="letter">Generate Letter</button>
+                <button class="btn btn-primary" type="button" id="save">Save to Database</button>
+              </div>
+            </div>
+          </fieldset>
+          </fieldset>
+        </form>
+    </div>
+    <button class="btn btn-secondary" id="reset" type="button">Start Over</button>
+  </div>
+{% endblock %}
+</body>
