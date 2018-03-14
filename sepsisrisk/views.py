@@ -40,3 +40,7 @@ def sepsisrisk(request):
 
 def result(request):
     return render(request, 'sepsisrisk/result.html')
+
+def log(request):
+    Sepsis_log = Patient.objects.all()
+    return render(request, 'sepsisrisk/log.html')

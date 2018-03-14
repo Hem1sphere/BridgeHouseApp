@@ -4,4 +4,5 @@ from . import views
 urlpatterns = [
     path('', views.sepsisrisk),
     path('result/', views.result),
+    path('log/', views.log),
 ]
