@@ -41,22 +41,40 @@
     </nav>
 
     
-      <div class="mainpage-float-lefts card mb-3">
-        <table>
-            <tr>
-                <th>Field 1</th>
-                <th>Field 2</th>
-            </tr>
-            {% for item in Sepsis_log %}
-            <tr> 
-                <td>{{ item.birth_date }}</td>
-                <td>{{ item.temp }}</td>
-            </tr>
-            {% endfor %}
-        </table>
+      <div class="container-table">
+
+          <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">Date Created</th>
+                  <th scope="col">Date of Birth</th>
+                  <th scope="col">Temperature</th>
+                  <th scope="col">Pulse</th>
+                  <th scope="col">Respiratory Rate</th>
+                  <th scope="col">Blood Pressure</th>
+                  <th scope="col">Capillary Refill Time</th>
+                  <th scope="col">Oxygen Saturation</th>
+                  <th scope="col">Urine Output</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for item in patient %}
+                <tr class="table-active">
+                    <td>{{ item.date_created }}</td>
+                    <td>{{ item.birth_date }}</td>
+                    <td>{{ item.temp }}</td>
+                    <td>{{ item.pulse }}</td>
+                    <td>{{ item.resp_rate }}</td>
+                    <td>{{ item.sys_blood_pressure }}</td>
+                    <td>{{ item.cap_refill_time }}</td>
+                    <td>{{ item.o2_stats }}</td>
+                    <td>{{ item.urine_output }}</td>
+                </tr>
+                {% endfor %}
+              </table>
     </div>
     <footer class="footer">
-      <div class="container">
+      <div class="container-footer">
         <span class="text-muted">UCL Computer Science Department Team 53</span>
       </div>
     </footer>

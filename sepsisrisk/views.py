@@ -43,4 +43,4 @@ def result(request):
 
 def log(request):
     Sepsis_log = Patient.objects.all()
-    return render(request, 'sepsisrisk/log.html')
+    return render(request, 'sepsisrisk/log.html', {'patient': Sepsis_log})
